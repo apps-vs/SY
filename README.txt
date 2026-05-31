@@ -1,0 +1,1 @@
+ضع ملف index.html الخاص بك داخل المشروع بجانب server.js ثم شغّل npm install ثم npm start.
