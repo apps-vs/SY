@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>��� ��� ������� - ���� �����</title>
+  <title>سعر صرف الدولار - ليرة سورية</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
@@ -11,16 +11,15 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg:        #06070d;
-      --surface:   rgba(255,255,255,0.045);
-      --border:    rgba(255,255,255,0.09);
-      --accent:    #3b82f6;
-      --accent-g:  #22c55e;
-      --accent-r:  #ef4444;
-      --text:      #f1f5f9;
-      --muted:     #64748b;
-      --gold:      #f59e0b;
-      --radius:    20px;
+      --bg:       #06070d;
+      --surface:  rgba(255,255,255,0.045);
+      --border:   rgba(255,255,255,0.09);
+      --accent:   #3b82f6;
+      --green:    #22c55e;
+      --red:      #ef4444;
+      --text:     #f1f5f9;
+      --muted:    #64748b;
+      --radius:   20px;
     }
 
     html { scroll-behavior: smooth; }
@@ -36,62 +35,39 @@
       overflow-x: hidden;
     }
 
-    /* ?? Animated background ?? */
     body::before {
       content: '';
-      position: fixed;
-      inset: 0;
+      position: fixed; inset: 0;
       background:
         radial-gradient(ellipse 80% 60% at 20% -10%, rgba(59,130,246,.18) 0%, transparent 60%),
         radial-gradient(ellipse 60% 50% at 80% 110%, rgba(34,197,94,.12) 0%, transparent 55%),
-        radial-gradient(ellipse 50% 40% at 50% 50%, rgba(245,158,11,.05) 0%, transparent 60%);
-      pointer-events: none;
-      z-index: 0;
+        radial-gradient(ellipse 50% 40% at 50% 50%,  rgba(245,158,11,.05) 0%, transparent 60%);
+      pointer-events: none; z-index: 0;
     }
 
     .wrap {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      max-width: 680px;
+      position: relative; z-index: 1;
+      width: 100%; max-width: 680px;
       padding: 24px 16px 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      display: flex; flex-direction: column; gap: 20px;
     }
 
-    /* ?? Header ?? */
-    header {
-      text-align: center;
-      padding: 12px 0 0;
-    }
+    /* ── Header ── */
+    header { text-align: center; padding: 12px 0 0; }
     .logo-row {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 4px;
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; margin-bottom: 4px;
     }
     .logo-icon {
       width: 44px; height: 44px;
       background: linear-gradient(135deg, var(--accent), #6366f1);
-      border-radius: 12px;
-      display: grid; place-items: center;
-      font-size: 22px;
-      box-shadow: 0 0 20px rgba(59,130,246,.35);
+      border-radius: 12px; display: grid; place-items: center;
+      font-size: 22px; box-shadow: 0 0 20px rgba(59,130,246,.35);
     }
-    header h1 {
-      font-size: clamp(1.25rem, 4vw, 1.6rem);
-      font-weight: 700;
-      letter-spacing: -.02em;
-    }
-    header p {
-      font-size: .82rem;
-      color: var(--muted);
-      margin-top: 2px;
-    }
+    header h1 { font-size: clamp(1.25rem, 4vw, 1.6rem); font-weight: 700; letter-spacing: -.02em; }
+    header p  { font-size: .82rem; color: var(--muted); margin-top: 2px; }
 
-    /* ?? Glass card ?? */
+    /* ── Glass card ── */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -103,605 +79,463 @@
     }
     .card:hover { border-color: rgba(255,255,255,.15); }
 
-    /* ?? Rate card ?? */
+    /* ── Rate card ── */
     .rate-card { text-align: center; }
-
     .rate-label {
-      font-size: .78rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: .12em;
-      color: var(--muted);
-      margin-bottom: 10px;
+      font-size: .78rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .12em; color: var(--muted); margin-bottom: 10px;
     }
 
     .pair {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
+      display: flex; align-items: center; justify-content: center;
+      gap: 10px; margin-bottom: 24px; flex-wrap: wrap;
     }
-    .flag {
-      font-size: 1.9rem;
-      line-height: 1;
-      filter: drop-shadow(0 2px 4px rgba(0,0,0,.4));
-    }
-    .pair-sep {
-      font-size: .85rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
+    .flag { font-size: 1.9rem; line-height: 1; filter: drop-shadow(0 2px 4px rgba(0,0,0,.4)); }
+    .pair-sep { font-size: .85rem; color: var(--muted); font-weight: 500; }
 
     .rates-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 20px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;
     }
 
     .rate-box {
       background: rgba(255,255,255,.03);
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 16px 12px;
-      position: relative;
-      overflow: hidden;
-      transition: background .3s;
+      border-radius: 14px; padding: 16px 12px;
+      position: relative; overflow: hidden; transition: background .3s;
     }
     .rate-box::before {
-      content: '';
-      position: absolute;
-      inset: 0;
+      content: ''; position: absolute; inset: 0;
       background: linear-gradient(135deg, transparent 60%, rgba(59,130,246,.06));
       pointer-events: none;
     }
-
-    .rb-label {
-      font-size: .75rem;
-      color: var(--muted);
-      font-weight: 600;
-      letter-spacing: .06em;
-      margin-bottom: 8px;
-    }
-
+    .rb-label { font-size: .75rem; color: var(--muted); font-weight: 600; letter-spacing: .06em; margin-bottom: 8px; }
     .rb-value {
-      font-size: clamp(1.5rem, 5vw, 2.1rem);
-      font-weight: 900;
-      letter-spacing: -.02em;
-      line-height: 1;
+      font-size: clamp(1.5rem, 5vw, 2.1rem); font-weight: 900;
+      letter-spacing: -.02em; line-height: 1;
+      display: flex; align-items: center; gap: 6px; justify-content: center;
+      flex-wrap: wrap; direction: ltr;
       transition: all .35s cubic-bezier(.34,1.56,.64,1);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      justify-content: center;
-      flex-wrap: wrap;
     }
+    .rb-currency { font-size: .75rem; color: var(--muted); font-weight: 500; margin-top: 4px; }
 
-    .rb-currency {
-      font-size: .75rem;
-      color: var(--muted);
-      font-weight: 500;
-      margin-top: 4px;
-    }
-
-    .arrow {
-      font-size: 1.1rem;
-      font-weight: 900;
-      animation: pulse 1.5s ease-in-out 3;
-    }
-    .arrow.up   { color: var(--accent-g); }
-    .arrow.down { color: var(--accent-r); }
+    .arrow { font-size: 1rem; font-weight: 900; animation: pulse 1.5s ease-in-out 3; }
+    .arrow.up   { color: var(--green); }
+    .arrow.down { color: var(--red); }
     .arrow.flat { color: var(--muted); }
 
     @keyframes pulse {
       0%,100% { opacity: 1; transform: scale(1); }
-      50%      { opacity: .6; transform: scale(1.3); }
+      50%      { opacity: .6; transform: scale(1.4); }
     }
-
-    .flash-up   { animation: flashUp .5s ease; }
+    .flash-up   { animation: flashUp   .5s ease; }
     .flash-down { animation: flashDown .5s ease; }
+    @keyframes flashUp   { 0% { background: rgba(34,197,94,.18); } 100% { background: transparent; } }
+    @keyframes flashDown { 0% { background: rgba(239,68,68,.18); } 100% { background: transparent; } }
 
-    @keyframes flashUp {
-      0%   { background: rgba(34,197,94,.15); }
-      100% { background: transparent; }
-    }
-    @keyframes flashDown {
-      0%   { background: rgba(239,68,68,.15); }
-      100% { background: transparent; }
-    }
-
-    /* ?? Status bar ?? */
+    /* ── Status bar ── */
     .status-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      flex-wrap: wrap;
-      font-size: .76rem;
-      color: var(--muted);
-      padding-top: 16px;
-      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 8px; flex-wrap: wrap; font-size: .76rem; color: var(--muted);
+      padding-top: 16px; border-top: 1px solid var(--border);
     }
     .status-dot {
-      display: inline-block;
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--accent-g);
-      box-shadow: 0 0 6px var(--accent-g);
-      animation: blink 2s ease-in-out infinite;
-      margin-left: 5px;
+      display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+      background: var(--green); box-shadow: 0 0 6px var(--green);
+      animation: blink 2s ease-in-out infinite; margin-left: 5px;
     }
-    @keyframes blink {
-      0%,100% { opacity: 1; }
-      50%      { opacity: .3; }
-    }
-    .status-dot.error { background: var(--accent-r); box-shadow: 0 0 6px var(--accent-r); animation: none; }
+    @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+    .status-dot.error { background: var(--red); box-shadow: 0 0 6px var(--red); animation: none; }
 
     .refresh-btn {
-      background: none;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: 8px;
-      padding: 4px 10px;
-      font-family: inherit;
-      font-size: .73rem;
-      cursor: pointer;
-      transition: all .2s;
-      display: flex; align-items: center; gap: 4px;
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); border-radius: 8px; padding: 4px 10px;
+      font-family: inherit; font-size: .73rem; cursor: pointer;
+      transition: all .2s; display: flex; align-items: center; gap: 4px;
     }
     .refresh-btn:hover { border-color: var(--accent); color: var(--accent); }
     .refresh-btn.spinning svg { animation: spin .7s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ?? Progress bar ?? */
-    .progress-track {
-      height: 3px;
-      background: rgba(255,255,255,.06);
-      border-radius: 4px;
-      overflow: hidden;
-      margin-top: 12px;
-    }
+    /* ── Progress bar ── */
+    .progress-track { height: 3px; background: rgba(255,255,255,.06); border-radius: 4px; overflow: hidden; margin-top: 12px; }
     .progress-bar {
-      height: 100%;
-      background: linear-gradient(90deg, var(--accent), #6366f1);
-      border-radius: 4px;
-      width: 100%;
-      transform-origin: right;
+      height: 100%; background: linear-gradient(90deg, var(--accent), #6366f1);
+      border-radius: 4px; width: 100%; transform-origin: right;
       animation: countdown 5s linear infinite;
     }
-    @keyframes countdown {
-      from { transform: scaleX(1); }
-      to   { transform: scaleX(0); }
-    }
+    @keyframes countdown { from { transform: scaleX(1); } to { transform: scaleX(0); } }
 
-    /* ?? Section title ?? */
+    /* ── Error msg ── */
+    .error-msg { text-align: center; color: var(--red); font-size: .82rem; padding: 8px 0; display: none; }
+
+    /* ── Section title ── */
     .section-title {
-      font-size: .88rem;
-      font-weight: 700;
-      color: var(--muted);
-      letter-spacing: .06em;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .section-title span { font-size: 1.1rem; }
-
-    /* ?? Calculator ?? */
-    .calc-grid {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 12px;
+      font-size: .88rem; font-weight: 700; color: var(--muted);
+      letter-spacing: .06em; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 8px;
     }
 
+    /* ── Calculator ── */
+    .calc-grid { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 12px; }
     .calc-field { position: relative; }
     .calc-field label {
-      display: block;
-      font-size: .73rem;
-      font-weight: 600;
-      letter-spacing: .06em;
-      color: var(--muted);
-      margin-bottom: 6px;
-      display: flex;
-      align-items: center;
-      gap: 5px;
+      display: flex; align-items: center; gap: 5px;
+      font-size: .73rem; font-weight: 600; letter-spacing: .06em;
+      color: var(--muted); margin-bottom: 6px;
     }
-
-    .calc-input-wrap {
-      position: relative;
-    }
-    .calc-flag {
-      position: absolute;
-      top: 50%; right: 14px;
-      transform: translateY(-50%);
-      font-size: 1.3rem;
-      pointer-events: none;
-    }
+    .calc-input-wrap { position: relative; }
+    .calc-flag { position: absolute; top: 50%; right: 14px; transform: translateY(-50%); font-size: 1.3rem; pointer-events: none; }
     .calc-input {
-      width: 100%;
-      background: rgba(255,255,255,.05);
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      width: 100%; background: rgba(255,255,255,.05);
+      border: 1px solid var(--border); border-radius: 14px;
       padding: 16px 48px 16px 16px;
-      font-family: 'Cairo', sans-serif;
-      font-size: clamp(1rem, 3.5vw, 1.25rem);
-      font-weight: 700;
-      color: var(--text);
-      text-align: center;
-      outline: none;
-      transition: border-color .2s, background .2s, box-shadow .2s;
-      -moz-appearance: textfield;
+      font-family: 'Cairo', sans-serif; font-size: clamp(1rem, 3.5vw, 1.25rem);
+      font-weight: 700; color: var(--text); text-align: center;
+      outline: none; transition: border-color .2s, background .2s, box-shadow .2s;
+      direction: ltr;
     }
-    .calc-input::-webkit-inner-spin-button,
-    .calc-input::-webkit-outer-spin-button { -webkit-appearance: none; }
     .calc-input:focus {
-      border-color: var(--accent);
-      background: rgba(59,130,246,.08);
+      border-color: var(--accent); background: rgba(59,130,246,.08);
       box-shadow: 0 0 0 3px rgba(59,130,246,.15);
     }
 
     .swap-btn {
-      background: rgba(255,255,255,.06);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      width: 40px; height: 40px;
-      display: grid; place-items: center;
-      cursor: pointer;
-      font-size: 1.1rem;
-      color: var(--muted);
-      transition: all .25s;
-      flex-shrink: 0;
-      margin-top: 20px;
+      background: rgba(255,255,255,.06); border: 1px solid var(--border);
+      border-radius: 50%; width: 40px; height: 40px;
+      display: grid; place-items: center; cursor: pointer;
+      font-size: 1.1rem; color: var(--muted); transition: all .25s;
+      flex-shrink: 0; margin-top: 20px;
     }
-    .swap-btn:hover {
-      background: rgba(59,130,246,.15);
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: rotate(180deg);
-    }
+    .swap-btn:hover { background: rgba(59,130,246,.15); border-color: var(--accent); color: var(--accent); transform: rotate(180deg); }
 
-    /* ?? Source note ?? */
+    /* ── Source note ── */
     .source-note {
-      text-align: center;
-      font-size: .73rem;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
+      text-align: center; font-size: .73rem; color: var(--muted);
+      display: flex; align-items: center; justify-content: center; gap: 6px;
     }
-    .source-note a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-    }
+    .source-note a { color: var(--accent); text-decoration: none; font-weight: 600; }
     .source-note a:hover { text-decoration: underline; }
 
-    /* ?? Footer ?? */
-    footer {
-      text-align: center;
-      color: rgba(100,116,139,.4);
-      font-size: .65rem;
-      padding: 4px 0 8px;
-      letter-spacing: .05em;
-    }
+    /* ── Footer ── */
+    footer { text-align: center; color: rgba(100,116,139,.4); font-size: .65rem; padding: 4px 0 8px; letter-spacing: .05em; }
 
-    /* ?? Error state ?? */
-    .error-msg {
-      text-align: center;
-      color: var(--accent-r);
-      font-size: .82rem;
-      padding: 8px 0;
-      display: none;
-    }
-
-    /* ?? Responsive ?? */
+    /* ── Responsive ── */
     @media (max-width: 480px) {
       .rates-row { grid-template-columns: 1fr; }
       .calc-grid { grid-template-columns: 1fr; }
       .swap-btn { margin: 0 auto; width: 36px; height: 36px; }
     }
-    @media (max-width: 360px) {
-      .card { padding: 20px 16px; }
-    }
+    @media (max-width: 360px) { .card { padding: 20px 16px; } }
   </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- Header -->
   <header>
     <div class="logo-row">
-      <div class="logo-icon">??</div>
-      <h1>��� ��� �������</h1>
+      <div class="logo-icon">💱</div>
+      <h1>سعر صرف الدولار</h1>
     </div>
-    <p>����� ������ ������� � ����� ���� �� 5 �����</p>
+    <p>مقابل الليرة السورية &middot; تحديث فوري كل 5 ثوانٍ</p>
   </header>
 
-  <!-- Rate card -->
   <div class="card rate-card" id="rateCard">
-    <div class="rate-label">����� ������</div>
+    <div class="rate-label">السعر الحالي</div>
     <div class="pair">
-      <span class="flag">????</span>
-      <span class="pair-sep">������ �������</span>
-      <span style="color:var(--muted)">?</span>
-      <span class="pair-sep">������� ��������</span>
-      <span class="flag">????</span>
+      <span class="flag">🇸🇾</span>
+      <span class="pair-sep">الليرة السورية</span>
+      <span style="color:var(--muted)">⟷</span>
+      <span class="pair-sep">الدولار الأمريكي</span>
+      <span class="flag">🇺🇸</span>
     </div>
 
     <div class="rates-row">
       <div class="rate-box" id="buyBox">
-        <div class="rb-label">?? ��� ������</div>
-        <div class="rb-value" id="buyVal">
-          <span class="loading-dots">���</span>
-        </div>
-        <div class="rb-currency">�.� / �����</div>
+        <div class="rb-label">🟢 سعر الشراء</div>
+        <div class="rb-value" id="buyVal">···</div>
+        <div class="rb-currency">ل.س / دولار</div>
       </div>
       <div class="rate-box" id="sellBox">
-        <div class="rb-label">?? ��� ������</div>
-        <div class="rb-value" id="sellVal">
-          <span class="loading-dots">���</span>
-        </div>
-        <div class="rb-currency">�.� / �����</div>
+        <div class="rb-label">🔴 سعر المبيع</div>
+        <div class="rb-value" id="sellVal">···</div>
+        <div class="rb-currency">ل.س / دولار</div>
       </div>
     </div>
 
-    <div class="error-msg" id="errorMsg">?? ����� ������� ������� ���� ����� �������Ʌ</div>
+    <div class="error-msg" id="errorMsg">⚠️ تعذّر الاتصال، جارٍ إعادة المحاولة…</div>
 
     <div class="status-bar">
       <div style="display:flex;align-items:center;gap:4px;">
         <span class="status-dot" id="statusDot"></span>
-        <span id="statusText">���� �������</span>
+        <span id="statusText">جارٍ الاتصال…</span>
       </div>
       <div style="display:flex;align-items:center;gap:8px;">
-        <span id="lastUpdate" style="font-size:.72rem;">�</span>
+        <span id="lastUpdate" style="font-size:.72rem;">—</span>
         <button class="refresh-btn" id="refreshBtn" onclick="manualRefresh()">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M23 4v6h-6"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
           </svg>
-          �����
+          تحديث
         </button>
       </div>
     </div>
 
-    <div class="progress-track">
-      <div class="progress-bar" id="progressBar"></div>
-    </div>
+    <div class="progress-track"><div class="progress-bar" id="progressBar"></div></div>
   </div>
 
-  <!-- Calculator -->
   <div class="card">
-    <div class="section-title">
-      <span>??</span> ����� ����� �������
-    </div>
-
+    <div class="section-title">🧮 حاسبة تحويل العملات</div>
     <div class="calc-grid">
       <div class="calc-field">
-        <label>???? ���� �����</label>
+        <label>🇸🇾 ليرة سورية</label>
         <div class="calc-input-wrap">
-          <span class="calc-flag">????</span>
-          <input
-            class="calc-input"
-            id="inSYP"
-            type="text"
-            inputmode="decimal"
-            placeholder="0"
-            oninput="onSypInput()"
-            autocomplete="off"
-          />
+          <span class="calc-flag">🇸🇾</span>
+          <input class="calc-input" id="inSYP" type="text" inputmode="decimal" placeholder="0" oninput="onSypInput()" autocomplete="off" />
         </div>
       </div>
-
-      <button class="swap-btn" onclick="swapInputs()" title="���">?</button>
-
+      <button class="swap-btn" onclick="swapInputs()" title="عكس">⇄</button>
       <div class="calc-field">
-        <label>???? ����� ������</label>
+        <label>🇺🇸 دولار أمريكي</label>
         <div class="calc-input-wrap">
-          <span class="calc-flag">????</span>
-          <input
-            class="calc-input"
-            id="inUSD"
-            type="text"
-            inputmode="decimal"
-            placeholder="0"
-            oninput="onUsdInput()"
-            autocomplete="off"
-          />
+          <span class="calc-flag">🇺🇸</span>
+          <input class="calc-input" id="inUSD" type="text" inputmode="decimal" placeholder="0" oninput="onUsdInput()" autocomplete="off" />
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Source note -->
   <div class="source-note">
-    <span>??</span>
-    <span>������:</span>
+    <span>📡</span>
+    <span>المصدر:</span>
     <a href="https://sp-today.com" target="_blank" rel="noopener">sp-today.com</a>
-    <span>� ������� ��������� ���</span>
+    <span>&middot; الأسعار للاستئناس فقط</span>
   </div>
 
-  <footer>�����: wm</footer>
+  <footer>تصميم: wm</footer>
 </div>
 
 <script>
-  /* ?? State ?? */
-  let prevBuy      = null;
-  let prevSell     = null;
-  let currentBuy   = null;
-  let currentSell  = null;
-  let currentChange = 0;
-  let lastActiveInput = null;
+  /* ══════════════════════════════════════════
+     الحالة الداخلية
+  ══════════════════════════════════════════ */
+  var prevBuy      = null;
+  var prevSell     = null;
+  var currentBuy   = null;
+  var currentSell  = null;
+  var lastInput    = null;   // 'syp' | 'usd'
 
-  /* ?? Formatting ?? */
-  const fmt = (n) =>
-    n == null ? '�' :
-    Number.isInteger(n)
-      ? n.toLocaleString('ar-SA')
-      : n.toLocaleString('ar-SA', { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+  /* ══════════════════════════════════════════
+     تنسيق الأرقام — أرقام لاتينية + فواصل
+  ══════════════════════════════════════════ */
+  function fmtNum(n) {
+    if (n == null) return '—';
+    // نستخدم en-US لضمان أرقام لاتينية (0-9) بفاصلة كل 3 أرقام
+    return Math.round(n).toLocaleString('en-US');
+  }
+
+  function fmtDec(n, digits) {
+    if (n == null) return '';
+    return n.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: digits || 4 });
+  }
 
   function parseNum(str) {
-    const cleaned = str.replace(/[^\d.]/g, '');
-    const n = parseFloat(cleaned);
+    // إزالة كل ما ليس رقماً أو نقطة
+    var c = str.replace(/[^0-9.]/g, '');
+    var n = parseFloat(c);
     return isNaN(n) ? null : n;
   }
 
-  function formatInput(str) {
-    const raw = str.replace(/[^\d.]/g, '');
-    const parts = raw.split('.');
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  function fmtInput(str) {
+    // تنسيق حقل الإدخال بفواصل
+    var raw   = str.replace(/[^0-9.]/g, '');
+    var parts = raw.split('.');
+    parts[0]  = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
     return parts.join('.');
   }
 
-  /* ?? Rate fetch ?? */
+  /* ══════════════════════════════════════════
+     جلب الأسعار
+  ══════════════════════════════════════════ */
+  // محاولة 1: خادم API المحلي (عند التشغيل على Replit)
+  // محاولة 2: بروكسي CORS عام لجلب sp-today.com مباشرة
+  var PROXIES = [
+    '/api/rate',                                                               // Replit server
+    'https://api.allorigins.win/get?url=' + encodeURIComponent('https://sp-today.com/'),
+    'https://corsproxy.io/?url='           + encodeURIComponent('https://sp-today.com/'),
+  ];
+  var proxyIndex = 0;
+
+  function parseHtmlRate(html) {
+    // نفس المنطق المستخدم في الخادم
+    var marker = '\\"code\\":\\"USD\\"';
+    var idx    = html.indexOf(marker);
+    if (idx >= 0) {
+      var block = html.slice(idx, idx + 1200);
+      var buyM  = block.match(/\\"buy\\":([\d]+)/);
+      var sellM = block.match(/\\"sell\\":([\d]+)/);
+      var chgM  = block.match(/\\"damascus\\"[^}]+\\"change\\":([-\d.]+)/);
+      if (buyM && sellM) {
+        return {
+          buy:    parseInt(buyM[1]),
+          sell:   parseInt(sellM[1]),
+          change: chgM ? parseFloat(chgM[1]) : 0,
+        };
+      }
+    }
+    // fallback بدون escape
+    var m2 = html.match(/"code"\s*:\s*"USD"[^}]{0,1200}"damascus"\s*:\s*\{\s*"buy"\s*:\s*(\d+)\s*,\s*"sell"\s*:\s*(\d+)/);
+    if (m2) return { buy: parseInt(m2[1]), sell: parseInt(m2[2]), change: 0 };
+    return null;
+  }
+
   async function fetchRate() {
-    const btn = document.getElementById('refreshBtn');
+    var btn = document.getElementById('refreshBtn');
     btn.classList.add('spinning');
-    try {
-      const res = await fetch('/api/rate', { cache: 'no-store' });
-      if (!res.ok) throw new Error(res.statusText);
-      const data = await res.json();
-      if (!data.success) throw new Error('API error');
 
-      prevBuy  = currentBuy;
-      prevSell = currentSell;
-      currentBuy    = data.buy;
-      currentSell   = data.sell;
-      currentChange = data.change ?? 0;
+    var tried = 0;
+    while (tried < PROXIES.length) {
+      var url = PROXIES[proxyIndex % PROXIES.length];
+      try {
+        var res = await fetch(url, { cache: 'no-store', signal: AbortSignal.timeout(8000) });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        var data = await res.json();
 
-      updateDisplay();
-      document.getElementById('errorMsg').style.display = 'none';
-      document.getElementById('statusDot').classList.remove('error');
+        // خادم Replit المحلي
+        if (data.success !== undefined) {
+          if (!data.success) throw new Error('API error');
+          onGotRate(data.buy, data.sell, data.change || 0, new Date(data.updatedAt));
+          btn.classList.remove('spinning');
+          return;
+        }
 
-      const d = new Date(data.updatedAt);
-      document.getElementById('lastUpdate').textContent =
-        '��� �����: ' + d.toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      document.getElementById('statusText').textContent = '���� � ����� �� 5 �����';
+        // بروكسي allorigins / corsproxy → محتوى HTML في data.contents أو data.body
+        var html = data.contents || data.body || '';
+        var rate = parseHtmlRate(html);
+        if (!rate) throw new Error('parse failed');
+        onGotRate(rate.buy, rate.sell, rate.change, new Date());
+        btn.classList.remove('spinning');
+        return;
 
-      /* update calculator output without disturbing active field */
-      updateCalcFromRate();
-
-    } catch (e) {
-      document.getElementById('statusDot').classList.add('error');
-      document.getElementById('statusText').textContent = '��� �� �������';
-      document.getElementById('errorMsg').style.display = 'block';
-    } finally {
-      btn.classList.remove('spinning');
+      } catch (e) {
+        proxyIndex++;
+        tried++;
+      }
     }
+
+    // كل المحاولات فشلت
+    btn.classList.remove('spinning');
+    document.getElementById('statusDot').classList.add('error');
+    document.getElementById('statusText').textContent = 'خطأ في الاتصال';
+    document.getElementById('errorMsg').style.display = 'block';
   }
 
-  function arrow(now, prev) {
-    if (prev === null) return { html: '', cls: 'flat' };
-    if (now > prev) return { html: '?', cls: 'up' };
-    if (now < prev) return { html: '?', cls: 'down' };
-    return { html: '?', cls: 'flat' };
+  function onGotRate(buy, sell, change, ts) {
+    prevBuy  = currentBuy;
+    prevSell = currentSell;
+    currentBuy  = buy;
+    currentSell = sell;
+
+    updateRateDisplay(change);
+    updateCalcOutput();
+
+    document.getElementById('errorMsg').style.display  = 'none';
+    document.getElementById('statusDot').classList.remove('error');
+    document.getElementById('statusText').textContent = 'متصل · يتحدث كل 5 ثوانٍ';
+
+    var h  = String(ts.getHours()).padStart(2,'0');
+    var m  = String(ts.getMinutes()).padStart(2,'0');
+    var s  = String(ts.getSeconds()).padStart(2,'0');
+    document.getElementById('lastUpdate').textContent = 'آخر تحديث: ' + h + ':' + m + ':' + s;
   }
 
-  function updateDisplay() {
-    const buyA  = arrow(currentBuy,  prevBuy);
-    const sellA = arrow(currentSell, prevSell);
-
-    const buyEl  = document.getElementById('buyVal');
-    const sellEl = document.getElementById('sellVal');
-
-    buyEl.innerHTML =
-      `${fmt(currentBuy)} <span class="arrow ${buyA.cls}">${buyA.html}</span>`;
-    sellEl.innerHTML =
-      `${fmt(currentSell)} <span class="arrow ${sellA.cls}">${sellA.html}</span>`;
-
-    /* flash animation */
-    if (prevBuy !== null && currentBuy !== prevBuy) {
-      const cls = currentBuy > prevBuy ? 'flash-up' : 'flash-down';
-      const box = document.getElementById('buyBox');
-      box.classList.remove('flash-up', 'flash-down');
-      void box.offsetWidth;
-      box.classList.add(cls);
+  /* ══════════════════════════════════════════
+     عرض السعر مع الأسهم والوميض
+  ══════════════════════════════════════════ */
+  function arrowHtml(now, prev, apiChange) {
+    var dir;
+    if (prev === null) {
+      dir = (apiChange > 0) ? 'up' : (apiChange < 0) ? 'down' : 'flat';
+    } else {
+      dir = (now > prev) ? 'up' : (now < prev) ? 'down' : 'flat';
     }
-    if (prevSell !== null && currentSell !== prevSell) {
-      const cls = currentSell > prevSell ? 'flash-up' : 'flash-down';
-      const box = document.getElementById('sellBox');
-      box.classList.remove('flash-up', 'flash-down');
-      void box.offsetWidth;
-      box.classList.add(cls);
-    }
+    var symbol = dir === 'up' ? '▲' : dir === 'down' ? '▼' : '';
+    return symbol ? '<span class="arrow ' + dir + '">' + symbol + '</span>' : '';
   }
 
-  /* ?? Calculator ?? */
+  function flashBox(id, now, prev) {
+    if (prev === null || now === prev) return;
+    var el  = document.getElementById(id);
+    var cls = now > prev ? 'flash-up' : 'flash-down';
+    el.classList.remove('flash-up','flash-down');
+    void el.offsetWidth;
+    el.classList.add(cls);
+  }
+
+  function updateRateDisplay(apiChange) {
+    document.getElementById('buyVal').innerHTML  = fmtNum(currentBuy)  + ' ' + arrowHtml(currentBuy,  prevBuy,  apiChange);
+    document.getElementById('sellVal').innerHTML = fmtNum(currentSell) + ' ' + arrowHtml(currentSell, prevSell, apiChange);
+    flashBox('buyBox',  currentBuy,  prevBuy);
+    flashBox('sellBox', currentSell, prevSell);
+  }
+
+  /* ══════════════════════════════════════════
+     الحاسبة
+  ══════════════════════════════════════════ */
   function midRate() {
     if (currentBuy == null || currentSell == null) return null;
     return (currentBuy + currentSell) / 2;
   }
 
   function onSypInput() {
-    lastActiveInput = 'syp';
-    const raw = document.getElementById('inSYP').value;
-    const pos = document.getElementById('inSYP').selectionStart;
-    const formatted = formatInput(raw);
-    document.getElementById('inSYP').value = formatted;
-
-    const n = parseNum(formatted);
-    const rate = midRate();
-    if (n !== null && rate !== null) {
-      const usd = n / rate;
-      document.getElementById('inUSD').value = usd.toLocaleString('ar-SA', {
-        minimumFractionDigits: 0, maximumFractionDigits: 4
-      });
-    } else {
-      document.getElementById('inUSD').value = '';
-    }
+    lastInput = 'syp';
+    var el  = document.getElementById('inSYP');
+    var fmt = fmtInput(el.value);
+    el.value = fmt;
+    var n    = parseNum(fmt);
+    var rate = midRate();
+    document.getElementById('inUSD').value = (n !== null && rate) ? fmtDec(n / rate, 4) : '';
   }
 
   function onUsdInput() {
-    lastActiveInput = 'usd';
-    const raw = document.getElementById('inUSD').value;
-    const formatted = formatInput(raw);
-    document.getElementById('inUSD').value = formatted;
-
-    const n = parseNum(formatted);
-    const rate = midRate();
-    if (n !== null && rate !== null) {
-      const syp = n * rate;
-      document.getElementById('inSYP').value = Math.round(syp).toLocaleString('ar-SA');
-    } else {
-      document.getElementById('inSYP').value = '';
-    }
+    lastInput = 'usd';
+    var el  = document.getElementById('inUSD');
+    var fmt = fmtInput(el.value);
+    el.value = fmt;
+    var n    = parseNum(fmt);
+    var rate = midRate();
+    document.getElementById('inSYP').value = (n !== null && rate) ? fmtNum(n * rate) : '';
   }
 
-  function updateCalcFromRate() {
-    if (lastActiveInput === 'syp') onSypInput();
-    else if (lastActiveInput === 'usd') onUsdInput();
+  function updateCalcOutput() {
+    if      (lastInput === 'syp') onSypInput();
+    else if (lastInput === 'usd') onUsdInput();
   }
 
   function swapInputs() {
-    const a = document.getElementById('inSYP').value;
-    const b = document.getElementById('inUSD').value;
+    var a = document.getElementById('inSYP').value;
+    var b = document.getElementById('inUSD').value;
     document.getElementById('inSYP').value = b;
     document.getElementById('inUSD').value = a;
-    lastActiveInput = null;
+    lastInput = null;
   }
 
-  /* ?? Manual refresh ?? */
-  function manualRefresh() {
-    restartProgress();
-    fetchRate();
-  }
-
-  /* ?? Progress bar restart ?? */
+  /* ══════════════════════════════════════════
+     التحديث التلقائي
+  ══════════════════════════════════════════ */
   function restartProgress() {
-    const pb = document.getElementById('progressBar');
+    var pb = document.getElementById('progressBar');
     pb.style.animation = 'none';
     void pb.offsetWidth;
     pb.style.animation = 'countdown 5s linear infinite';
   }
 
-  /* ?? Auto-refresh ?? */
-  fetchRate();
-  setInterval(() => {
-    fetchRate();
+  function manualRefresh() {
     restartProgress();
-  }, 5000);
+    fetchRate();
+  }
+
+  fetchRate();
+  setInterval(function() { fetchRate(); restartProgress(); }, 5000);
 </script>
 </body>
 </html>
